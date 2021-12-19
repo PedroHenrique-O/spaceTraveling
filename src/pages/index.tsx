@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next';
 import Prismic from '@prismicio/client';
 
+import Link from 'next/link';
 import { getPrismicClient } from '../services/prismic';
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
@@ -28,12 +29,16 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
   return (
     <main className={styles.container}>
       <div className={styles.logoWrapp}> Logo </div>
-      <div className={styles.postWrapp}>
-        <h1> Title</h1>
-        <p>Subtitle</p>
-        <time>12 dezembro 2021 </time>
-        <span> Pedro Henrique </span>
-      </div>
+      {postsPagination.results.map((posts: Post) => (
+        <Link key={posts.uid} href={posts.uid}>
+          <div className={styles.postWrapp}>
+            <h1> {posts.data.title} </h1>
+            <p>{posts.data.subtitle}</p>
+            <time> {posts.first_publication_date} </time>
+            <span> {posts.data.author}</span>
+          </div>
+        </Link>
+      ))}
     </main>
   );
 }
