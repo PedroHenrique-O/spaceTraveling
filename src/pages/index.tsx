@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { GetStaticProps } from 'next';
 import Prismic from '@prismicio/client';
 
@@ -43,12 +44,11 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
   );
 }
 
-export const getStaticProps: GetStaticProps = async context => {
-  const prismic = getPrismicClient(context.preview);
+export const getStaticProps: GetStaticProps = async () => {
+  const prismic = getPrismicClient();
   const postsResponse = await prismic.query(
     [Prismic.predicates.at('document.type', 'nextblog1')],
     {
-      fetch: ['title', 'content'],
       pageSize: 1,
     }
   );
@@ -69,6 +69,8 @@ export const getStaticProps: GetStaticProps = async context => {
     results: response,
     next_page: postsResponse.next_page,
   };
+
+  console.log('---------', postsPagination.results, '---------');
 
   return {
     props: postsPagination,
