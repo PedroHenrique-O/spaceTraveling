@@ -1,0 +1,39 @@
+.container {
+  max-width: 1120px;
+  margin: 4rem auto;
+  padding: 0 4rem;
+
+  .logoWrapp {
+    height: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .postWrapp {
+    margin: 4rem 0;
+
+    h1 {
+      color: var(--grey-1);
+    }
+    p {
+      color: var(--grey-2);
+      margin: 0.6rem 0 1.5rem;
+    }
+
+    time {
+      color: var(--grey-3);
+    }
+    span {
+      color: var(--grey-3);
+      margin-left: 1rem;
+      svg {
+      }
+    }
+  }
+
+  .loadMorePosts {
+    background: none;
+    color: var(--pink-1);
+    font-weight: bold;
+    border: none;
+  }
+}
