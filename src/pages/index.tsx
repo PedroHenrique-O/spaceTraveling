@@ -31,7 +31,7 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
     <main className={styles.container}>
       <div className={styles.logoWrapp}> Logo </div>
       {postsPagination.results.map((posts: Post) => (
-        <Link key={posts.uid} href={posts.uid}>
+        <Link key={posts.uid} href={`/posts/${posts.uid}`}>
           <div className={styles.postWrapp}>
             <h1> {posts.data.title} </h1>
             <p>{posts.data.subtitle}</p>
@@ -49,7 +49,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const postsResponse = await prismic.query(
     [Prismic.predicates.at('document.type', 'nextblog1')],
     {
-      pageSize: 1,
+      pageSize: 2,
     }
   );
 
@@ -73,6 +73,6 @@ export const getStaticProps: GetStaticProps = async () => {
   console.log('---------', postsPagination.results, '---------');
 
   return {
-    props: postsPagination,
+    props: { postsPagination },
   };
 };
