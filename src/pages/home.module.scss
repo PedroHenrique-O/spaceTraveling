@@ -1,8 +1,14 @@
-.postWrapp {
+.titleWrapp {
   margin: 4rem 0;
 
   h1 {
     color: var(--grey-1);
+
+    &:hover {
+      color: var(--pink-1);
+      filter: opacity(0.8);
+      cursor: pointer;
+    }
   }
   p {
     color: var(--grey-2);
@@ -25,4 +31,7 @@
   color: var(--pink-1);
   font-weight: bold;
   border: none;
+  &:hover {
+    filter: brightness(0.8);
+  }
 }
