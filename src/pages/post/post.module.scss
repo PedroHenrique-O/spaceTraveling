@@ -1,1 +1,27 @@
-// TODO
+.bannerWrap {
+  max-width: auto;
+}
+
+.titleWrapp {
+  margin-bottom: 1rem;
+  h1 {
+    color: var(--grey-1);
+    margin-top: 0.8rem;
+    margin-bottom: 0.6rem;
+    font-weight: bold;
+    font-size: 3rem;
+  }
+  time {
+    margin-right: 0.6rem;
+  }
+  span {
+    margin-right: 0.6rem;
+  }
+}
+.contentWrapper {
+  h1 {
+    margin: 2.5rem 0;
+    font-weight: bold;
+    font-size: 2rem;
+  }
+}
