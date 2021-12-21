@@ -51,6 +51,7 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
       setLoadMore(data.results);
     }
     getNextPage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleLoadMorePosts = (): void => {
@@ -75,28 +76,30 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
   };
 
   return (
-    <main className={commonStyles.container}>
+    <>
       <Header />
-      {post.map(posts => (
-        <Link key={posts.uid} href={`/post/${posts.uid}`}>
-          <div className={styles.postWrapp}>
-            <h1> {posts.data.title} </h1>
-            <p>{posts.data.subtitle}</p>
-            <time> {posts.first_publication_date} </time>
-            <span> {posts.data.author}</span>
-          </div>
-        </Link>
-      ))}
-      {!!nextPage && (
-        <button
-          onClick={handleLoadMorePosts}
-          className={styles.loadMorePosts}
-          type="submit"
-        >
-          Carregar mais
-        </button>
-      )}
-    </main>
+      <main className={commonStyles.container}>
+        {post.map(posts => (
+          <Link key={posts.uid} href={`/post/${posts.uid}`}>
+            <div className={styles.titleWrapp}>
+              <h1> {posts.data.title} </h1>
+              <p>{posts.data.subtitle}</p>
+              <time> {posts.first_publication_date} </time>
+              <span> {posts.data.author}</span>
+            </div>
+          </Link>
+        ))}
+        {!!nextPage && (
+          <button
+            onClick={handleLoadMorePosts}
+            className={styles.loadMorePosts}
+            type="submit"
+          >
+            Carregar mais
+          </button>
+        )}
+      </main>
+    </>
   );
 }
 
