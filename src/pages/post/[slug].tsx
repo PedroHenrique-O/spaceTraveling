@@ -14,6 +14,7 @@ import { getPrismicClient } from '../../services/prismic';
 
 import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
+import Header from '../../components/Header';
 
 interface Post {
   first_publication_date: string | null;
@@ -37,17 +38,18 @@ interface PostProps {
 }
 
 export default function Post({ post }: PostProps): JSX.Element {
-  const [posts, setPosts] = useState<Post[]>([]);
-
   return (
     <>
+      <Header />
       <Head> SpaceTraveling | Posts </Head>
-      <Image
-        alt="banner"
-        width="1120p"
-        height="400"
-        src={post.data.image.url}
-      />
+      <div className={styles.bannerWrap}>
+        <Image
+          alt="banner"
+          width="1440px"
+          height="350px"
+          src={post.data.image.url}
+        />
+      </div>
       <main className={commonStyles.container}>
         <div className={styles.titleWrapp}>
           <h1>{post.data.title}</h1>
@@ -61,19 +63,19 @@ export default function Post({ post }: PostProps): JSX.Element {
           <span> {post.data.author} </span>
           <span className={styles.time}> 4m </span>
         </div>
-        <h1> </h1>
 
-        {post.data.content.map((content, index) => (
-          <>
-            <h1> {RichText.asText(content.heading)} </h1>
-            <div
-              className="teste"
-              dangerouslySetInnerHTML={{
-                __html: RichText.asHtml(content.body),
-              }}
-            />
-          </>
-        ))}
+        <section className={styles.contentWrapper}>
+          {post.data.content.map((content, index) => (
+            <>
+              <h1> {RichText.asText(content.heading)} </h1>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: RichText.asHtml(content.body),
+                }}
+              />
+            </>
+          ))}
+        </section>
       </main>
     </>
   );
