@@ -40,6 +40,7 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
       ),
     }))
   );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [nextPage, setNextPage] = useState(postsPagination.next_page);
   const [loadMore, setLoadMore] = useState<Post[]>([]);
 
