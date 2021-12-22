@@ -2,9 +2,11 @@ import { GetStaticProps } from 'next';
 import Prismic from '@prismicio/client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { format } from 'date-fns';
 import ptBr from 'date-fns/locale/pt-BR';
+import { AiOutlineUser } from 'react-icons/ai';
+import { AiOutlineCalendar } from 'react-icons/ai';
 import { getPrismicClient } from '../services/prismic';
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
@@ -35,33 +37,29 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
       ...formatted,
       first_publication_date: format(
         new Date(formatted.first_publication_date),
-        'dd MM yyyy',
+        'dd MMM yyyy',
         { locale: ptBr }
       ),
     }))
   );
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const [nextPage, setNextPage] = useState(postsPagination.next_page);
-  const [loadMore, setLoadMore] = useState<Post[]>([]);
 
-  useEffect(() => {
-    async function getNextPage(): Promise<void> {
-      const response = await fetch(`${nextPage}`);
-      const data = await response.json();
-      setLoadMore(data.results);
+  const handleLoadMorePosts = async (): Promise<void> => {
+    if (nextPage === null) {
+      return;
     }
-    getNextPage();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const response = await fetch(`${nextPage}`);
+    const data = await response.json();
 
-  const handleLoadMorePosts = (): void => {
-    const newState = [...post];
+    setNextPage(data.next_page);
+    // atualizo o nextPage para a proxima requisição
 
-    const newLoadMore = loadMore.map((loadMore1: Post) => ({
+    const newLoadMore = data.results.map((loadMore1: Post) => ({
       uid: loadMore1.uid,
       first_publication_date: format(
         new Date(loadMore1.first_publication_date),
-        'dd MM yyyy',
+        'dd MMM yyyy',
         { locale: ptBr }
       ),
       data: {
@@ -71,8 +69,7 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
       },
     }));
 
-    newState.push(...newLoadMore);
-    setPost(newState);
+    setPost([...post, ...newLoadMore]);
   };
 
   return (
@@ -84,8 +81,13 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
             <div className={styles.titleWrapp}>
               <h1> {posts.data.title} </h1>
               <p>{posts.data.subtitle}</p>
-              <time> {posts.first_publication_date} </time>
-              <span> {posts.data.author}</span>
+              <time>
+                <AiOutlineCalendar />
+                {posts.first_publication_date}
+              </time>
+              <span>
+                <AiOutlineUser /> {posts.data.author}
+              </span>
             </div>
           </Link>
         ))}
@@ -95,7 +97,7 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
             className={styles.loadMorePosts}
             type="submit"
           >
-            Carregar mais
+            Carregar mais posts
           </button>
         )}
       </main>
@@ -123,6 +125,10 @@ export const getStaticProps: GetStaticProps = async () => {
       },
     };
   });
+  // const nextpage = await prismic.query(
+  //   Prismic.predicates.at('document.type', 'nextblog1'),
+  //   {page }
+  // );
 
   const postsPagination = {
     results: response,
