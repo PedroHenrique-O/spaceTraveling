@@ -17,11 +17,15 @@
 
   time {
     color: var(--grey-3);
+    svg {
+      margin-right: 0.5rem;
+    }
   }
   span {
     color: var(--grey-3);
     margin-left: 1rem;
     svg {
+      margin-right: 0.5rem;
     }
   }
 }
