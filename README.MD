@@ -20,9 +20,9 @@ SpaceTravelling é um desafio obrigário do bootcamp da @Rocketseat. Onde foi pr
 
 > Para utilizar o projeto você deve criar uma conta no Prismic para obter uma api key.
 
-Crie um arquivo `.env.local` na raiz do projeto.
-Use o comando `yarn` ou `npm install` para instalar as dependências do projeto.
-Inicie o projeto com `yarn dev`.
-Rode os testes com `yarn test`.
+Crie um arquivo `.env.local` na raiz do projeto.<br/>
+Use o comando `yarn` ou `npm install` para instalar as dependências do projeto..<br/>
+Inicie o projeto com `yarn dev`.<br/>
+Rode os testes com `yarn test`.<br/>
 
 </p>
