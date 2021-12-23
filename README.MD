@@ -5,7 +5,7 @@
 <li> Next JS </li>
 <li> Prismic-CMS </li>
 <li> Typescript </li>
-<li> Jest <li>
+<li> Jest </li>
 
 <h1>About the application: </h1>
 
