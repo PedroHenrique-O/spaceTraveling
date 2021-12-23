@@ -123,11 +123,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const prismic = getPrismicClient();
   const posts = await prismic.query(
     [Prismic.predicates.at('document.type', 'nextblog1')],
-    { pageSize: 1 }
+    {
+      pageSize: 2,
+    }
   );
+
   const paths = posts.results.map(post => ({
     params: { slug: post.uid },
   }));
+
   return {
     paths,
     fallback: true,
@@ -140,20 +144,24 @@ export const getStaticProps: GetStaticProps = async context => {
   const prismic = getPrismicClient();
   const response: Post = await prismic.getByUID('nextblog1', String(slug), {});
 
-  const post: Post = {
-    first_publication_date: response.first_publication_date,
-    data: {
-      title: response.data.title,
-      author: response.data.author,
-      banner: {
-        url: response.data.banner.url,
-      },
-      content: response.data.content.map(content => ({
-        heading: content.heading,
-        body: [...content.body],
-      })),
-    },
-  };
+  const post = response;
+
+  // Post = {
+  //   first_publication_date: response.first_publication_date,
+  //   data: {
+  //     title: response.data.title,
+  //     author: response.data.author,
+  //     banner: {
+  //       url: response.data.banner.url,
+  //     },
+  //     content: response.data.content.map(content => ({
+  //       heading: content.heading,
+  //       body: [...content.body],
+  //     })),
+  //   },
+  // };
+
+  // console.log(JSON.stringify(response, null, 4));
 
   return {
     props: { post },
