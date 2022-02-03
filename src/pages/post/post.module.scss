@@ -32,3 +32,34 @@
     margin-bottom: 1.5rem;
   }
 }
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #282c34;
+
+  h3 {
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--headings);
+    margin-bottom: 0.5rem;
+  }
+  a {
+    color: var(--pink-1);
+    font-weight: 600;
+  }
+  div {
+    padding-top: 3rem;
+  }
+  div + div {
+    text-align: right;
+  }
+}
+.editedTime {
+  margin-top: 1rem;
+  font-style: italic;
+  font-style: italic;
+  font-size: 0.875rem;
+  color: #bbbbbb;
+}

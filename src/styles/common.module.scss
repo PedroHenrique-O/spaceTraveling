@@ -3,3 +3,25 @@
   margin: 4rem auto;
   padding: 0 4rem;
 }
+
+.preview {
+  display: block;
+  width: 50%;
+  //max-width: 700px;
+  margin: 0 auto;
+  margin-top: 5.5rem;
+  background: #fff;
+  color: #111;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 1.125rem;
+  &:hover {
+    background: #eee;
+  }
+}
+
+.comments {
+  margin-top: 5rem;
+}
